@@ -6,7 +6,7 @@ const addButton = document.querySelector(".add-btn");
 const subtractButton = document.querySelector(".subtract-btn");
 const multiplyButton = document.querySelector(".multiply-btn");
 const divideButton = document.querySelector(".divide-btn");
-const equalsButton = document.querySelector(".equals-btn");
+const equalsButton = document.querySelector(".equals-btn, .calc-enter");
 const clearButton = document.querySelector(".clear-btn");
 
 const numberButtons = document.querySelectorAll(".num-btn");
@@ -86,31 +86,45 @@ clearButton.addEventListener("click", () => {
 });
 
 // Decimal button functionality
-decimalButton.addEventListener("click", () => calcInput.value += ".");
+decimalButton.addEventListener("click", () => {
+  const current = calcInput.value;
+  const lastNumber = current.split(/[\+\-\*\/]\s*/).pop().trim(); 
+  const lastChar = current.slice(-1);
+
+  // Block if last character is an operator or space
+  if (["+", "-", "*", "/", " "].includes(lastChar)) return;
+
+  // Block if current number already has a decimal
+  if (lastNumber.includes(".")) return;
+
+  calcInput.value += ".";
+});
 
 // Updated equals button functionality to use switch statement
 equalsButton.addEventListener("click", () => {
-    input = calcEnter.value.trim();
+    const input = calcInput.value.trim();
 
     switch (true) {
-        case calcInput.value.includes("+"):
-            const addValues = calcInput.value.split(" + ");
+        case input.includes(" + "):
+            const addValues = input.split(" + ");
             calcInput.value = add(Number(addValues[0]), Number(addValues[1]));
             break;
-        case calcInput.value.includes("-"):
-            const subtractValues = calcInput.value.split(" - ");
+        case input.includes(" - "):
+            const subtractValues = input.split(" - ");
             calcInput.value = subtract(Number(subtractValues[0]), Number(subtractValues[1]));
             break;
-        case calcInput.value.includes("*"):
-            const multiplyValues = calcInput.value.split(" * ");
+        case input.includes(" * "):
+            const multiplyValues = input.split(" * ");
             calcInput.value = multiply(Number(multiplyValues[0]), Number(multiplyValues[1]));
             break;
-        case calcInput.value.includes("/"):
-            const divideValues = calcInput.value.split(" / ");
+        case input.includes(" / "):
+            const divideValues = input.split(" / ");
             calcInput.value = divide(Number(divideValues[0]), Number(divideValues[1]));
             break;
-    } }
-);
+        default:
+            break;
+    }
+});
 
 document.addEventListener("keydown", function(event) {
     if (event.key === "Enter") {
