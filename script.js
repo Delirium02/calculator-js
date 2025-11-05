@@ -31,6 +31,23 @@ function divide(a, b) {
     return a / b;
 }
 
+/*
+function operator(operator, a, b) {
+    switch (operator) {
+        case "+":
+            return add(a, b);
+        case "-":
+            return subtract(a, b);
+        case "*":
+            return multiply(a, b); 
+        case "/":
+            return divide(a, b);
+        default:
+            return null;
+    }
+};
+*/
+
 // Addition button functionality
 addButton.addEventListener("click", () => {
     const lastChar = calcInput.value.slice(-1);
@@ -101,33 +118,37 @@ decimalButton.addEventListener("click", () => {
 });
 
 // Updated equals button functionality to use switch statement
-equalsButton.addEventListener("click", () => {
-    const input = calcInput.value.trim();
+function equals() {
+  const input = calcInput.value.trim();
 
-    switch (true) {
-        case input.includes(" + "):
-            const addValues = input.split(" + ");
-            calcInput.value = add(Number(addValues[0]), Number(addValues[1]));
-            break;
-        case input.includes(" - "):
-            const subtractValues = input.split(" - ");
-            calcInput.value = subtract(Number(subtractValues[0]), Number(subtractValues[1]));
-            break;
-        case input.includes(" * "):
-            const multiplyValues = input.split(" * ");
-            calcInput.value = multiply(Number(multiplyValues[0]), Number(multiplyValues[1]));
-            break;
-        case input.includes(" / "):
-            const divideValues = input.split(" / ");
-            calcInput.value = divide(Number(divideValues[0]), Number(divideValues[1]));
-            break;
-        default:
-            break;
+  switch (true) {
+    case input.includes("+"): {
+      const [a, b] = input.split("+").map(n => Number(n.trim()));
+      calcInput.value = add(a, b);
+      break;
     }
-});
+    case input.includes("-"): {
+      const [a, b] = input.split("-").map(n => Number(n.trim()));
+      calcInput.value = subtract(a, b);
+      break;
+    }
+    case input.includes("*"): {
+      const [a, b] = input.split("*").map(n => Number(n.trim()));
+      calcInput.value = multiply(a, b);
+      break;
+    }
+    case input.includes("/"): {
+      const [a, b] = input.split("/").map(n => Number(n.trim()));
+      calcInput.value = divide(a, b);
+      break;
+    }
+  }
+}
+
+
+equalsButton.addEventListener("click", equals);
+calcEnter.addEventListener("click", equals);
 
 document.addEventListener("keydown", function(event) {
-    if (event.key === "Enter") {
-        equalsButton.click();
-    }
+    if (event.key === "Enter") equals();
 });
