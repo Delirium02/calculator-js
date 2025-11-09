@@ -1,129 +1,134 @@
 * {
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  box-sizing: border-box;
 }
 
-html, body {
-    height: 100%;
-    margin: 0;
-    font-size: 16px;
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-size: 16px;
 }
 
 body {
-    background-image: url('./background-img.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-color: #aaa;
+  background-image: url("./background-img.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #aaa;
 }
 
 .container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto;
-    padding: 2px;
-    min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  padding: 2px;
+  min-height: 90vh;
 }
 
 #header {
-    color: white;
-    text-align: center;
-    font-size: 2rem;
-    font-weight: bold;
-    margin-top: 10px;
+  color: white;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-top: 10px;
 }
 
 .input-section {
-    display: flex;
-    flex-direction: row;
-    margin: 0 auto;
-    padding: 2px;
+  display: flex;
+  flex-direction: row;
+  margin: 0 auto;
+  padding: 2px;
 }
 
 #calc-input {
-    background-color: rgb(211, 254, 253);
-    width: 200px;
-    height: 40px;
-    padding: 10px;
-    font-size: 14px;
+  background-color: rgb(211, 254, 253);
+  width: 200px;
+  height: 40px;
+  padding: 10px;
+  font-size: 16px;
 }
+
 #calc-input:focus {
-    outline: none;
-    border: 2px solid rgb(15, 26, 130);
+  outline: none;
+  border: 2px solid rgb(15, 26, 130);
 }
 
 .calc-enter {
-    background: linear-gradient(rgb(15, 26, 130), rgb(4, 5, 95));
-    color: white;
-    font-size: 1.2rem;
-    border-radius: 5px;
+  background: linear-gradient(rgb(15, 26, 130), rgb(4, 5, 95));
+  color: white;
+  font-size: 1.2rem;
+  border-radius: 5px;
 }
 
 .calc-enter:hover {
-    background: linear-gradient(rgb(20, 29, 113), rgb(3, 4, 65));
-    cursor: pointer;
-    transform: scale(101%);
-    transition: all 0.2s ease;
+  background: linear-gradient(rgb(20, 29, 113), rgb(3, 4, 65));
+  cursor: pointer;
+  transform: scale(101%);
+  transition: all 0.2s ease;
 }
 
 .all-buttons {
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: center;
-    align-items: center;
-    gap: 10px; 
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
 
 .calc-buttons {
-    display: grid;
-    grid-template-rows: repeat(5, 1fr);
-    margin: 0 auto;
-    padding: 2px;
+  display: grid;
+  grid-template-rows: repeat(5, 1fr);
+  margin: 0 auto;
+  padding: 2px;
 }
 
 .calc-buttons button {
-    font-size: 1.2rem;
-    background-color: rgb(4, 5, 95);
-    color: white;
-    padding: 10px;
-    margin: 1px;
-    border-radius: 5px;
+  font-size: 1.2rem;
+  background-color: rgb(4, 5, 95);
+  color: white;
+  padding: 10px;
+  margin: 1px;
+  border-radius: 5px;
 }
 
 .calc-buttons button:hover {
-    background-color: rgb(0, 12, 123);
-    cursor: pointer;
+  background-color: rgb(0, 12, 123);
+  cursor: pointer;
 }
 
 .calc-buttons button:active {
-    background-color: rgb(0, 12, 63);
-    transform: scale(97%);
+  background-color: rgb(0, 12, 63);
+  transform: scale(97%);
 }
 
 .number-buttons {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    padding-top: 10px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  padding-top: 10px;
 }
 
-.num-btn, .decimal-btn {
-    color: white;
-    background-color: #5970a7;
-    font-size: 1.2rem;
-    padding: 20px;
-    border-radius: 15px;
-    border: 2px solid rgb(0, 0, 81);
+.num-btn,
+.decimal-btn {
+  color: white;
+  background-color: #5970a7;
+  font-size: 1.2rem;
+  padding: 20px;
+  border-radius: 15px;
+  border: 2px solid rgb(0, 0, 81);
 }
 
-.num-btn:hover, .decimal-btn:hover {
-    background-color: #1128a6;
-    cursor: pointer;
+.num-btn:hover,
+.decimal-btn:hover {
+  background-color: #1128a6;
+  cursor: pointer;
 }
 
-.num-btn:active, .decimal-btn:active {
-    background-color: #151b5c;
-    transform: scale(97%);
+.num-btn:active,
+.decimal-btn:active {
+  background-color: #151b5c;
+  transform: scale(97%);
 }
