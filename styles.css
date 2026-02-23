@@ -111,8 +111,7 @@ body {
   padding-top: 10px;
 }
 
-.num-btn,
-.decimal-btn {
+.num-btn{
   color: white;
   background-color: #5970a7;
   font-size: 1.2rem;
@@ -121,14 +120,12 @@ body {
   border: 2px solid rgb(0, 0, 81);
 }
 
-.num-btn:hover,
-.decimal-btn:hover {
+.num-btn:hover {
   background-color: #1128a6;
   cursor: pointer;
 }
 
-.num-btn:active,
-.decimal-btn:active {
+.num-btn:active{
   background-color: #151b5c;
   transform: scale(97%);
 }
