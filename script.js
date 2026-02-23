@@ -33,44 +33,19 @@ function divide(a, b) {
 
 const operators = [" ", "+", "-", "*", "/"];
 
-addButton.addEventListener("click", () => {
-    const lastChar = calcInput.value.slice(-1);
+const operatorArray = [addButton, subtractButton, multiplyButton, divideButton];
 
-    if (operators.includes(lastChar)) {
-        return;
-    }
+operatorArray.forEach((operator) => {
+    operator.addEventListener("click", () => {
+        const firstChar = calcInput.value.charAt(0);
+        const lastChar = calcInput.value.slice(-1);
 
-    calcInput.value += "+";
-});
+        if (operators.includes(lastChar) || firstChar === "") {
+            return;
+        }
 
-subtractButton.addEventListener("click", () => {
-    const lastChar = calcInput.value.slice(-1);
-
-    if (operators.includes(lastChar)) {
-        return;
-    }
-
-    calcInput.value += "-";
-});
-
-multiplyButton.addEventListener("click", () => {
-    const lastChar = calcInput.value.slice(-1);
-
-    if (operators.includes(lastChar)) {
-        return;
-    }
-
-    calcInput.value += "*";
-});
-
-divideButton.addEventListener("click", () => {
-    const lastChar = calcInput.value.slice(-1);
-
-    if (operators.includes(lastChar)) {
-        return;
-    }
-
-    calcInput.value += "/";
+        calcInput.value += operator.textContent;
+    });
 });
 
 function operate(a, b, operator) {
@@ -94,16 +69,20 @@ function operate(a, b, operator) {
 numberButtons.forEach((button) => {
     button.addEventListener("click", () => {
         calcInput.value += button.textContent;
+        currentNumber += button.textContent;
+        return currentNumber;
     });
 });
 
-decimalButton.addEventListener(("click"), () => {
-  if (calcInput.value.includes(".")) {
-    return;
-  };
+decimalButton.addEventListener("click", () => {
+    const splitNumbers = calcInput.value.split(/[+\-x÷]/);
 
-  calcInput.value += decimalButton.textContent;
-})
+    if (splitNumbers[splitNumbers.length - 1].includes(".")) {
+        return;
+    }
+
+    calcInput.value += decimalButton.textContent;
+});
 
 equalsButton.addEventListener("click", () => {
     operate();
