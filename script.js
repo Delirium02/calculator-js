@@ -14,6 +14,11 @@ const decimalButton = document.querySelector(".decimal-btn");
 
 const currentEquation = calcInput.value;
 
+firstNum = "";
+secondNum = "";
+currentOperator = "";
+currentNumber = "";
+
 // Basic arithmetic functions
 function add(a, b) {
     return a + b;
@@ -31,20 +36,21 @@ function divide(a, b) {
     return a / b;
 }
 
-const operators = [" ", "+", "-", "*", "/"];
+const operators = [" ", "+", "-", "x", "÷"];
 
 const operatorArray = [addButton, subtractButton, multiplyButton, divideButton];
 
-operatorArray.forEach((operator) => {
-    operator.addEventListener("click", () => {
+operatorArray.forEach((op) => {
+    op.addEventListener("click", () => {
         const firstChar = calcInput.value.charAt(0);
         const lastChar = calcInput.value.slice(-1);
 
-        if (operators.includes(lastChar) || firstChar === "") {
+        if (firstChar === "" || operators.includes(lastChar)) {
             return;
         }
 
-        calcInput.value += operator.textContent;
+        calcInput.value += op.textContent;
+        currentOperator = op.textContent;
     });
 });
 
@@ -57,9 +63,9 @@ function operate(a, b, operator) {
             return add(a, b);
         case "-":
             return subtract(a, b);
-        case "*":
+        case "x":
             return multiply(a, b);
-        case "/":
+        case "÷":
             return b === 0 ? "Error" : divide(a, b);
         default:
             return null;
@@ -68,9 +74,15 @@ function operate(a, b, operator) {
 
 numberButtons.forEach((button) => {
     button.addEventListener("click", () => {
-        calcInput.value += button.textContent;
-        currentNumber += button.textContent;
-        return currentNumber;
+        const value = button.textContent;
+
+        if (currentOperator === "") {
+            firstNum += value;
+        } else {
+            secondNum += value;
+        }
+
+        calcInput.value += value;
     });
 });
 
@@ -81,9 +93,32 @@ decimalButton.addEventListener("click", () => {
         return;
     }
 
-    calcInput.value += decimalButton.textContent;
+    const value = decimalButton.textContent;
+
+        if (currentOperator === "") {
+            firstNum += value;
+        } else {
+            secondNum += value;
+        }
+
+        calcInput.value += value;
 });
 
 equalsButton.addEventListener("click", () => {
-    operate();
+    const result = operate(firstNum, secondNum, currentOperator);
+    calcInput.value = result;
+    firstNum = result;
+    secondNum = "";
+    currentOperator = "";
+});
+
+function clearInputField() {
+    calcInput.value = "";
+    firstNum = "";
+    secondNum = "";
+    currentOperator = "";
+}
+
+clearButton.addEventListener("click", () => {
+    clearInputField();
 });
