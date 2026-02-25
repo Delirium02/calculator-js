@@ -13,7 +13,8 @@
     <main>
       <div class="container">
         <section class="input-section">
-          <input type="text" id="calc-input" oninput="this.value = this.value.replace(/[^0-9+\-x÷]/g, '')" inputmode="numeric" />
+          <!-- <div class="error-msg">Error</div> -->
+          <input readonly type="text" id="calc-input" oninput="this.value = this.value.replace(/[^0-9+\-x÷]/g, '')" inputmode="numeric" />
           <button class="calc-enter equals-btn">Enter</button>
         </section>
 

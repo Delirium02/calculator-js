@@ -18,6 +18,14 @@ body {
   background-color: #aaa;
 }
 
+#header {
+  color: white;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -28,20 +36,18 @@ body {
   min-height: 90vh;
 }
 
-#header {
-  color: white;
-  text-align: center;
-  font-size: 2rem;
-  font-weight: bold;
-  margin-top: 10px;
-}
-
 .input-section {
   display: flex;
   flex-direction: row;
   margin: 0 auto;
   padding: 2px;
 }
+
+/* 
+.error-msg {
+  display: none;
+} 
+*/
 
 #calc-input {
   background-color: rgb(211, 254, 253);

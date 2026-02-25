@@ -11,13 +11,15 @@ const clearButton = document.querySelector(".clear-btn");
 
 const numberButtons = document.querySelectorAll(".num-btn:not(.decimal-btn)");
 const decimalButton = document.querySelector(".decimal-btn");
+// const errorMsg = document.querySelector(".error-msg");
 
 const currentEquation = calcInput.value;
 
-firstNum = "";
-secondNum = "";
-currentOperator = "";
-currentNumber = "";
+let firstNum = "";
+let secondNum = "";
+let currentOperator = "";
+let currentNumber = "";
+let resetScreen = false;
 
 // Basic arithmetic functions
 function add(a, b) {
@@ -42,15 +44,18 @@ const operatorArray = [addButton, subtractButton, multiplyButton, divideButton];
 
 operatorArray.forEach((op) => {
     op.addEventListener("click", () => {
-        const firstChar = calcInput.value.charAt(0);
         const lastChar = calcInput.value.slice(-1);
 
-        if (firstChar === "" || operators.includes(lastChar)) {
+        if (calcInput.value === "" || operators.includes(lastChar)) {
             return;
         }
 
-        calcInput.value += op.textContent;
+        if (firstNum !== "" && currentOperator !== "" && secondNum !== "") {
+            calculateEquation();
+        }
+
         currentOperator = op.textContent;
+        calcInput.value += currentOperator;
     });
 });
 
@@ -75,6 +80,11 @@ function operate(a, b, operator) {
 numberButtons.forEach((button) => {
     button.addEventListener("click", () => {
         const value = button.textContent;
+
+        if (resetScreen) {
+            clearInputField();
+            resetScreen = false;
+        }
 
         if (currentOperator === "") {
             firstNum += value;
@@ -107,11 +117,16 @@ decimalButton.addEventListener("click", () => {
 function calculateEquation() {
     if (firstNum === "" || currentOperator === "" || secondNum === "") return;
 
-    const result = operate(firstNum, secondNum, currentOperator);
-    calcInput.value = result;
+    let result = operate(firstNum, secondNum, currentOperator);
+    if (typeof result === "number" && result % 1 !== 0) {
+        calcInput.value = result.toFixed(5);
+    } else {
+        calcInput.value = result;
+    }
     firstNum = result.toString();
     secondNum = "";
     currentOperator = "";
+    resetScreen = true;
 }
 
 equalsButtons.forEach((equalsBtn) => {
@@ -129,11 +144,11 @@ document.addEventListener("keydown", (event) => {
         calcInput.value = calcInput.value.slice(0, -1);
 
         if (secondNum !== "") {
-            secondNum = secondNum.value.slice(0, -1);
+            secondNum = secondNum.slice(0, -1);
         } else if (currentOperator !== "") {
             currentOperator = "";
         } else {
-            firstNum = firstNum.value.slice(0, -1);
+            firstNum = firstNum.slice(0, -1);
         }
     }
 });
