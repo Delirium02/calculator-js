@@ -6,7 +6,7 @@ const addButton = document.querySelector(".add-btn");
 const subtractButton = document.querySelector(".subtract-btn");
 const multiplyButton = document.querySelector(".multiply-btn");
 const divideButton = document.querySelector(".divide-btn");
-const equalsButton = document.querySelector(".equals-btn, .calc-enter");
+const equalsButtons = document.querySelectorAll(".equals-btn");
 const clearButton = document.querySelector(".clear-btn");
 
 const numberButtons = document.querySelectorAll(".num-btn:not(.decimal-btn)");
@@ -95,21 +95,47 @@ decimalButton.addEventListener("click", () => {
 
     const value = decimalButton.textContent;
 
-        if (currentOperator === "") {
-            firstNum += value;
-        } else {
-            secondNum += value;
-        }
+    if (currentOperator === "") {
+        firstNum += value;
+    } else {
+        secondNum += value;
+    }
 
-        calcInput.value += value;
+    calcInput.value += value;
 });
 
-equalsButton.addEventListener("click", () => {
+function calculateEquation() {
+    if (firstNum === "" || currentOperator === "" || secondNum === "") return;
+
     const result = operate(firstNum, secondNum, currentOperator);
     calcInput.value = result;
-    firstNum = result;
+    firstNum = result.toString();
     secondNum = "";
     currentOperator = "";
+}
+
+equalsButtons.forEach((equalsBtn) => {
+    equalsBtn.addEventListener("click", calculateEquation);
+});
+
+document.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+        event.preventDefault();
+        calculateEquation();
+    }
+
+    if (event.key === "Backspace") {
+        event.preventDefault();
+        calcInput.value = calcInput.value.slice(0, -1);
+
+        if (secondNum !== "") {
+            secondNum = secondNum.value.slice(0, -1);
+        } else if (currentOperator !== "") {
+            currentOperator = "";
+        } else {
+            firstNum = firstNum.value.slice(0, -1);
+        }
+    }
 });
 
 function clearInputField() {
